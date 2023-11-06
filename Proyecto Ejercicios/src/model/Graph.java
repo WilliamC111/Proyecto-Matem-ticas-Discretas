@@ -25,7 +25,7 @@ public class Graph {
         adyacency = new ArrayList<>();
     }
 
-    public void addBook(Exercise exercise) {
+    public void addExcercise(Exercise exercise) {
         exercises.add(exercise);
         adyacency.add(new HashMap<>());
         // Se agrega una lista vacía para las conexiones del nuevo libro
