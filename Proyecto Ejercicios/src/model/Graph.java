@@ -7,67 +7,76 @@ import java.util.Map;
 
 public class Graph {
 
-    private List<Book> books;
-    private List<Map<Book, Integer>> adyacencia;
-    private ArrayList<Book> recommendedBooks = new ArrayList<Book>();
+    private List<Exercise> exercises;
+    private List<Map<Exercise, Double>> adyacency;
+    private ArrayList<Exercise> recommendedExercises = new ArrayList<Exercise>();
 
-    /* es una lista de mapas. Cada mapa representa las conexiones entre un libro y
-    sus libros adyacentes.La clave del mapa es un libro adyacente y el valor 
-    es un entero que representa el peso de la conexión.*/
-    public List<Book> getRecommendedBooks() {
-        return recommendedBooks;
+    /*
+     * es una lista de mapas. Cada mapa representa las conexiones entre un libro y
+     * sus libros adyacentes.La clave del mapa es un libro adyacente y el valor
+     * es un entero que representa el peso de la conexión.
+     */
+    public List<Exercise> recommendedExercises() {
+        return recommendedExercises;
     }
 
     public Graph() {
-        books = new ArrayList<>();
-        adyacencia = new ArrayList<>();
+        exercises = new ArrayList<>();
+        adyacency = new ArrayList<>();
     }
 
-    public void addBook(Book book) {
-        books.add(book);
-        adyacencia.add(new HashMap<>());// Se agrega una lista vacía para las conexiones del nuevo libro
-
+    public void addExcercise(Exercise exercise) {
+        exercises.add(exercise);
+        adyacency.add(new HashMap<>());
+        // Se agrega una lista vacía para las conexiones del nuevo libro
     }
 
-    // Método para agregar una arista (conexión entre libros con géneros en común)
+    // Método para agregar una arista (conexión entre ejercicios con grupos
+    // musculares en común)
     public void addConexion() {
         boolean foundConnection = true; // Variable para controlar el bucle while
 
         while (foundConnection) { // Bucle principal
             foundConnection = false; // Reinicia la variable foundConnection a false
 
-            // Bucle para recorrer los libros en la lista
-            for (int i = 0; i < books.size(); i++) {
-                Book book1 = books.get(i); // Obtiene el libro en la posición i
+            // Bucle para recorrer los ejercicios en la lista
+            for (int i = 0; i < exercises.size(); i++) {
+                Exercise exercise1 = exercises.get(i); // Obtiene el ejercicio en la posición i
 
-                // Bucle para comparar book1 con los libros restantes en la lista
-                for (int j = i + 1; j < books.size(); j++) {
-                    Book book2 = books.get(j); // Obtiene el libro en la posición j
+                // Bucle para comparar ejercicio1 con los ejercicios restantes en la lista
+                for (int j = i + 1; j < exercises.size(); j++) {
+                    Exercise exercise2 = exercises.get(j); // Obtiene el ejercicio en la posición j
 
-                    // Bucle para recorrer los géneros del libro1
-                    for (int k = 0; k < book1.getGeneres_book().size(); k++) {
-                        String genreBook1 = book1.getGeneres_book().get(k); // Obtiene el género en la posición k del libro1
+                    // Bucle para recorrer los grupos musculares del ejercicio1
+                    for (int k = 0; k < exercise1.getMuscularGroups().size(); k++) {
+                        // Obtiene el grupo muscular en la posición k del ejercicio1
+                        String muscularGroupExcercise1 = exercise1.getMuscularGroups().get(k);
 
-                        // Bucle para recorrer los géneros del libro2
-                        for (int l = 0; l < book2.getGeneres_book().size(); l++) {
-                            String genreBook2 = book2.getGeneres_book().get(l); // Obtiene el género en la posición l del libro2
+                        // Bucle para recorrer los grupos musculares del ejercicio2
+                        for (int l = 0; l < exercise2.getMuscularGroups().size(); l++) {
+                            // Obtiene el grupo muscular en la posición l del ejercicio2
+                            String muscularGroupExcercise2 = exercise2.getMuscularGroups().get(l);
 
-                            // Verifica si los géneros son iguales
-                            if (genreBook1.equals(genreBook2)) {
-                                // Obtiene las conexiones existentes para book1 y book2
-                                Map<Book, Integer> book1Connections = adyacencia.get(i);
-                                Map<Book, Integer> book2Connections = adyacencia.get(j);
+                            // Verifica si los grupos musculares son iguales
+                            if (muscularGroupExcercise1.equals(muscularGroupExcercise2)) {
+                                // Obtiene las conexiones existentes para ejercicio1 y ejercicio2
+                                Map<Exercise, Double> excercise1Connections = adyacency.get(i);
+                                Map<Exercise, Double> excercise2Connections = adyacency.get(j);
 
-                                // Verifica si book1 y book2 aún no están conectados
-                                if (!book1Connections.containsKey(book2) && !book2Connections.containsKey(book1)) {
-                                    // Calcula el peso de la conexión como la suma de la popularidad de ambos libros
-                                    int weight = book1.getPopularity() + book2.getPopularity();
+                                // Verifica si ejercicio1 y ejercicio2 aún no están conectados
+                                if (!excercise1Connections.containsKey(exercise2)
+                                        && !excercise2Connections.containsKey(exercise1)) {
+                                    // Calcula el peso de la conexión como la suma de la imc recomendado de ambos
+                                    // ejercicios
+
+                                    double weight = exercise1.getMaxBmi() + exercise2.getMaxBmi();
 
                                     // Agrega la conexión en ambos sentidos
-                                    book1Connections.put(book2, weight);
-                                    book2Connections.put(book1, weight);
+                                    excercise1Connections.put(exercise2, weight);
+                                    excercise2Connections.put(exercise1, weight);
 
-                                    foundConnection = true; // Actualiza foundConnection a true para continuar el bucle
+                                    // Actualiza foundConnection a true para continuar el bucle
+                                    foundConnection = true;
                                 }
                             }
                         }
@@ -77,29 +86,39 @@ public class Graph {
         }
     }
 
-    public Book findMostPopularBookByGenre(String genre) {
-        Book mostPopularBook = null; // Variable para almacenar el libro más popular
-        int maxPopularity = Integer.MIN_VALUE; // Variable para almacenar la popularidad máxima encontrada
+    public Exercise findMostRecommendedExerciseByMuscularGroup(String muscularGroup, double bmi) {
 
-        // Bucle para recorrer los libros en la lista
-        for (int i = 0; i < books.size(); i++) {
-            Book book = books.get(i); // Obtiene el libro en la posición i
+        Exercise mostRecommendedExercise = null; // Variable para almacenar el ejercicio más recomendado
+        double maxPopularity = Double.MIN_VALUE; // Variable para almacenar la recomendación máxima encontrada
 
-            // Verifica si el libro tiene el género buscado y no está en la lista de libros recomendados
-            if (book.getGeneres_book().contains(genre) && !recommendedBooks.contains(book)) {
-                Map<Book, Integer> connections = adyacencia.get(i); // Obtiene las conexiones del libro
+        // Bucle para recorrer los ejercicios en la lista
+        for (int i = 0; i < exercises.size(); i++) {
+            Exercise exercise = exercises.get(i); // Obtiene el ejercicio en la posición i
 
-                // Bucle para recorrer las conexiones del libro
-                for (Map.Entry<Book, Integer> entry : connections.entrySet()) {
-                    Book connectedBook = entry.getKey(); // Obtiene el libro conectado
-                    int connectionWeight = entry.getValue(); // Obtiene el peso de la conexión
-                    // Verifica si el libro conectado tiene el género buscado, tiene una conexión más popular
-                    // que el libro actual y no está en la lista de libros recomendados
-                    if (connectedBook.getGeneres_book().contains(genre)) {
-                        if (!recommendedBooks.contains(connectedBook)) {
-                            if (connectionWeight > maxPopularity) {
-                                mostPopularBook = connectedBook;
-                                maxPopularity = connectionWeight; 
+            // Verifica si el ejercicio tiene el grupo muscular buscado y no está en la
+            // lista de ejercicios recomendados
+            if (exercise.getMuscularGroups().contains(muscularGroup) && !recommendedExercises.contains(exercise)) {
+                // Obtiene las conexiones del ejercicio
+                Map<Exercise, Double> connections = adyacency.get(i);
+
+                // Bucle para recorrer las conexiones del ejercicio
+                for (Map.Entry<Exercise, Double> entry : connections.entrySet()) {
+                    Exercise connectedExercise = entry.getKey(); // Obtiene el ejercicio conectado
+                    double connectionWeight = entry.getValue(); // Obtiene el peso de la conexión
+                    // Verifica si el ejercicio conectado tiene el grupo muscular buscado, tiene una
+                    // conexión más recomendada o popular
+                    // que el ejercicio actual y no está en la lista de ejercicios recomendados
+                    if (connectedExercise.getMuscularGroups().contains(muscularGroup)) {
+                        if (!recommendedExercises.contains(connectedExercise)) {
+
+                            // VALIDAR SI EL BMI DADO ESTA ENTRE EL BMI MIN Y MAX DEL EJERCICIO
+                            if (bmi >= connectedExercise.getMinBmi() && bmi <= connectedExercise.getMaxBmi()) {
+                                // Verifica si el peso de la conexión es mayor que la recomendación máxima
+                                // encontrada
+                                if (connectionWeight > maxPopularity) {
+                                    mostRecommendedExercise = connectedExercise;
+                                    maxPopularity = connectionWeight;
+                                }
                             }
                         }
                     }
@@ -108,11 +127,13 @@ public class Graph {
             }
         }
 
-        // Si se encontró un libro más popular, se agrega a la lista de libros recomendados
-        if (mostPopularBook != null) {
-            recommendedBooks.add(mostPopularBook);
+        // Si se encontró un ejercicio más recomendado, se agrega a la lista de libros
+        // recomendados
+        if (mostRecommendedExercise != null) {
+            recommendedExercises.add(mostRecommendedExercise);
         }
 
-        return mostPopularBook; // Devuelve el libro más popular encontrado
-    }   
+        return mostRecommendedExercise; // Devuelve el ejercicio más recomendado encontrado
+    }
+
 }

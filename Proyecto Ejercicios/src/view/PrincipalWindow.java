@@ -4,10 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -22,11 +20,12 @@ public class PrincipalWindow extends JFrame {
 	private JPanel contentPane;
 	private JComboBox<String> comboBox;
 	private JLabel lblNewLabel_1;
-	private JTextField txtAltura, txtPeso;
-	
+	/**
+	 * Create the frame.
+	 */
 	public PrincipalWindow(ActionListener listener) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 600);
+		setBounds(100, 100, 407, 407);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -34,119 +33,64 @@ public class PrincipalWindow extends JFrame {
 		contentPane.setLayout(null);
 		
 		ModifyPanel panel = new ModifyPanel();
-		panel.setDirectionImg("/img/logo.jpg");
-		panel.setBounds(10, 1, 600, 600);
+		panel.setDirectionImg("/img/Back.jpg");
+		panel.setBounds(10, 11, 373, 348);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("BUSCA TU EJERCICIO");
-		lblNewLabel.setForeground(new Color(0, 0, 0));
-		lblNewLabel.setBounds(160, 20, 242, 39);
+		JLabel lblNewLabel = new JLabel("Recomendador de libros");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setBounds(10, 0, 242, 39);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 22));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel lblAltura = new JLabel("Altura (cm):");
-        lblAltura.setForeground(new Color(255, 255, 255));
-        lblAltura.setBounds(140, 115, 100, 30);
-        panel.add(lblAltura);
-
-        txtAltura = new JTextField();
-        txtAltura.setBounds(100, 145, 100, 30);
-		txtAltura.setBackground(Color.GRAY);
-        panel.add(txtAltura);
-
-        JLabel lblPeso = new JLabel("Peso (kg):");
-        lblPeso.setForeground(new Color(255, 255, 255));
-        lblPeso.setBounds(300, 115, 100, 30);
-        panel.add(lblPeso);
-
-        txtPeso = new JTextField();
-        txtPeso.setBounds(300, 145, 100, 30);
-		txtPeso.setBackground(Color.GRAY);
-        panel.add(txtPeso);
-
-        JButton btnSave = new JButton("Guardar");
-        btnSave.setBounds(200, 180, 100, 30);
-		btnSave.setBackground(Color.GRAY);
-        panel.add(btnSave);
-
-		btnSave.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String alturaStr = txtAltura.getText();
-        String pesoStr = txtPeso.getText();
-
-        if (alturaStr.isEmpty() || pesoStr.isEmpty()) {
-            return;
-        }
-
-        try {
-            double altura = Double.parseDouble(alturaStr);
-            double peso = Double.parseDouble(pesoStr);
-            System.out.println("Altura: " + altura + " cm, Peso: " + peso + " kg guardados.");
-            comboBox.setEnabled(true); 
-        } catch (NumberFormatException ex) {
-            
-            JOptionPane.showMessageDialog(null, "Ingrese valores numéricos para altura y peso.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-          
-        }
-    }
-});
-
-    
-JPanel comboBoxPanel = new JPanel();
-comboBoxPanel.setLayout(null);
-comboBoxPanel.setBounds(108, 250, 242, 30);
-comboBoxPanel.setBackground(Color.GRAY);
-panel.add(comboBoxPanel);
-
-JLabel comboBoxTitle = new JLabel("Grupos musculares");
-comboBoxTitle.setForeground(Color.black);
-comboBoxTitle.setFont(new Font("Yu Gothic UI", Font.BOLD, 11));
-comboBoxTitle.setHorizontalAlignment(SwingConstants.CENTER);
-comboBoxTitle.setBounds(0, 0, 252, 20);
-comboBoxPanel.add(comboBoxTitle);
-comboBox = new JComboBox<>();
-        comboBox.setBounds(108, 270, 242, 30);
 		
-comboBox.addItem("                 ");
-comboBox.addItem("Pecho");
-comboBox.addItem("Espalda");
-comboBox.addItem("Hombros");
-comboBox.addItem("Bíceps");
-comboBox.addItem("Tríceps");
-comboBox.addItem("Abdomen");
-comboBox.addItem("Piernas");
-comboBox.addItem("Glúteos");
-comboBox.addItem("Cardio");
-comboBox.addItem("Trapecio");
-comboBox.addItem("Antebrazo");
-comboBox.addItem("Isquiotibiales");
-comboBox.addItem("Pantorrillas");
-panel.add(comboBox);
-
+		comboBox= new JComboBox<>();
+		comboBox.setBounds(10, 41, 242, 30);
+		comboBox.addItem("                 ");
+		comboBox.addItem("Ciencia ficción");
+		comboBox.addItem("Fantasía");
+		comboBox.addItem("Distopía");
+		comboBox.addItem("Aventura");
+		comboBox.addItem("Romance");
+		comboBox.addItem("Misterio");
+		comboBox.addItem("Thriller");
+		comboBox.addItem("Suspenso");
+		comboBox.addItem("Policial");
+		comboBox.addItem("Drama");
+		comboBox.addItem("Comedia romántica");
+		comboBox.addItem("Novela rosa");
+		comboBox.addItem("Histórica");
+		comboBox.addItem("Biografía");
+		comboBox.addItem("Novela histórica");
+		comboBox.addItem("Realismo mágico");
+		comboBox.addItem("Terror");
+		comboBox.addItem("Suspenso psicológico");
+		comboBox.addItem("Horror cósmico");
+		comboBox.addItem("Gótico");
+		panel.add(comboBox);
+		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.setBounds(350, 245, 60, 60);
-		btnNewButton.setIcon(new ImageIcon(PrincipalWindow.class.getResource(("/img/lupa.jpg"))));
-		btnNewButton.setOpaque(false);
-		btnNewButton.setContentAreaFilled(false); 
+		btnNewButton.setBounds(264, 11, 86, 81);
+		btnNewButton.setIcon(new ImageIcon(PrincipalWindow.class.getResource(("/img/Group-removebg-preview.png"))));
+		btnNewButton.setOpaque(false); // Hace que el botón sea transparente
+		btnNewButton.setContentAreaFilled(false); // No muestra el área de contenido
 		btnNewButton.setBorderPainted(false);
 		btnNewButton.setActionCommand("Buscar");
 		btnNewButton.addActionListener(listener);
 		panel.add(btnNewButton);
 		
 		ModifyPanel panel_1 = new ModifyPanel();
-		panel_1.setDirectionImg("/img/gris.jpg");
-		panel_1.setBounds(190, 350, 180, 201);
+		panel_1.setDirectionImg("/img/Pergamino.jpg");
+		panel_1.setBounds(96, 73, 157, 201);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
 		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setFont(new Font("Yu Gothic UI", Font.PLAIN, 14));
-		lblNewLabel_1.setForeground(Color.WHITE); 
+		lblNewLabel_1.setFont(new Font("Yu Gothic UI", Font.PLAIN, 11));
 		lblNewLabel_1.setBounds(24, 25, 110, 139);
-		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP); 
+		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP); // Alineación vertical superior
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_1.add(lblNewLabel_1);
 		
