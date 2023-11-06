@@ -12,9 +12,11 @@ public class Graph {
     private ArrayList<Exercise> recommendedExercises = new ArrayList<Exercise>();
 
     /*
-     * es una lista de mapas. Cada mapa representa las conexiones entre un libro y
-     * sus libros adyacentes.La clave del mapa es un libro adyacente y el valor
-     * es un entero que representa el peso de la conexión.
+     * es una lista de mapas. Cada mapa representa las conexiones entre un ejercicio
+     * y
+     * sus ejercicios adyacentes.La clave del mapa es un ejercicio adyacente y el
+     * valor
+     * es un double que representa el peso de la conexión.
      */
     public List<Exercise> recommendedExercises() {
         return recommendedExercises;
