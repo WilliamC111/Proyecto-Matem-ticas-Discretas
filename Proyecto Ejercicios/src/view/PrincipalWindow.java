@@ -130,31 +130,16 @@ public class PrincipalWindow extends JFrame {
 		comboBox.addItem("Gemelos");
 		comboBox.addItem("Tibial anterior");
 		panel.add(comboBox);
-		
-		JLabel lblAltura = new JLabel("Altura (cm):");
-        lblAltura.setForeground(new Color(255, 255, 255));
-        lblAltura.setBounds(140, 115, 100, 30);
-        panel.add(lblAltura);
 
         txtAltura = new JTextField();
         txtAltura.setBounds(100, 145, 100, 30);
 		txtAltura.setBackground(Color.GRAY);
         panel.add(txtAltura);
 
-        JLabel lblPeso = new JLabel("Peso (kg):");
-        lblPeso.setForeground(new Color(255, 255, 255));
-        lblPeso.setBounds(300, 115, 100, 30);
-        panel.add(lblPeso);
-
         txtPeso = new JTextField();
         txtPeso.setBounds(300, 145, 100, 30);
 		txtPeso.setBackground(Color.GRAY);
         panel.add(txtPeso);
-
-        JButton btnSave = new JButton("Guardar");
-        btnSave.setBounds(200, 180, 100, 30);
-		btnSave.setBackground(Color.GRAY);
-        panel.add(btnSave);
 
 		btnSave.addActionListener(new ActionListener() {
     @Override
@@ -178,38 +163,6 @@ public class PrincipalWindow extends JFrame {
         }
     }
 });
-
-    
-JPanel comboBoxPanel = new JPanel();
-comboBoxPanel.setLayout(null);
-comboBoxPanel.setBounds(108, 250, 242, 30);
-comboBoxPanel.setBackground(Color.GRAY);
-panel.add(comboBoxPanel);
-
-JLabel comboBoxTitle = new JLabel("Grupos musculares");
-comboBoxTitle.setForeground(Color.black);
-comboBoxTitle.setFont(new Font("Yu Gothic UI", Font.BOLD, 11));
-comboBoxTitle.setHorizontalAlignment(SwingConstants.CENTER);
-comboBoxTitle.setBounds(0, 0, 252, 20);
-comboBoxPanel.add(comboBoxTitle);
-comboBox = new JComboBox<>();
-        comboBox.setBounds(108, 270, 242, 30);
-		
-comboBox.addItem("                 ");
-comboBox.addItem("Pecho");
-comboBox.addItem("Espalda");
-comboBox.addItem("Hombros");
-comboBox.addItem("Bíceps");
-comboBox.addItem("Tríceps");
-comboBox.addItem("Abdomen");
-comboBox.addItem("Piernas");
-comboBox.addItem("Glúteos");
-comboBox.addItem("Cardio");
-comboBox.addItem("Trapecio");
-comboBox.addItem("Antebrazo");
-comboBox.addItem("Isquiotibiales");
-comboBox.addItem("Pantorrillas");
-panel.add(comboBox);
 
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setBounds(350, 245, 60, 60);
