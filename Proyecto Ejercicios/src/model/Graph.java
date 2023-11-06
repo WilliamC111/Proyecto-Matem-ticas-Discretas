@@ -135,5 +135,4 @@ public class Graph {
 
         return mostRecommendedExercise; // Devuelve el ejercicio más recomendado encontrado
     }
-
 }

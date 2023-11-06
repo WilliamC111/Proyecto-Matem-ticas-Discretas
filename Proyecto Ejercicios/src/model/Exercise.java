@@ -51,8 +51,11 @@ public class Exercise {
         for (int i = 0; i < muscularGroups.size(); i++) {
             muscular.append("\n" + muscularGroups.get(i));
         }
-        return "Name Exercise=" + nameExcercise + "\nMuscular Groups:" + muscular + "\nSeries=" + series + "\nMin BMI="
-                + minBmi + "\nMax BMI=" + maxBmi + "\nID Exercise=" + idExercise;
+
+        return "<b>Ejercicio: </b>" + nameExcercise + "<br><b>Musculos:</b> " + muscular + "<br><b>Series:</b> "
+                + series
+                + "<br><b>Min. IMC:</b> "
+                + minBmi + "<br><b>Max. IMC: </b>" + maxBmi;
     }
 
 }
