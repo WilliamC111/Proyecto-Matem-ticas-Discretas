@@ -36,6 +36,7 @@ public class Manager implements ActionListener {
 				if (bmi == 0) {
 					principal.updateLabelText("Ingrese valores numéricos para altura y peso");
 				} else {
+					principal.setLblBMIData(bmi);
 					principal.updateLabelText(aux.toString());
 				}
 			} else {
@@ -91,7 +92,8 @@ public class Manager implements ActionListener {
 		graph.addExcercise(new Exercise("Crunch abdominal", anteriorTrunkMuscles, "3", 0, 100, 18));
 		graph.addExcercise(new Exercise("Plancha abdominal", anteriorTrunkMuscles, "3", 15, 34.9, 19));
 		graph.addExcercise(new Exercise("Elevación de piernas colgado", anteriorTrunkMuscles, "3", 0.0, 29.9, 20));
-		graph.addExcercise(new Exercise("Push-ups con progresión de desplazamiento", anteriorTrunkMuscles, "3", 0, 29.9, 21));
+		graph.addExcercise(
+				new Exercise("Push-ups con progresión de desplazamiento", anteriorTrunkMuscles, "3", 0, 29.9, 21));
 		graph.addExcercise(new Exercise("Fondos declinados", anteriorTrunkMuscles, "3", 24.9, 100, 22));
 		graph.addExcercise(new Exercise("Giros rusos", anteriorTrunkMuscles, "3", 0, 100, 23));
 		graph.addExcercise(new Exercise("Flexiones laterales con pesas", anteriorTrunkMuscles, "3", 0, 100, 24));
@@ -113,7 +115,6 @@ public class Manager implements ActionListener {
 		graph.addExcercise(new Exercise("Saltos de tijera", legMuscles, "3", 24.9, 100, 40));
 		graph.addExcercise(new Exercise("Elevación de talones sentado", legMuscles, "3", 0, 100, 41));
 	}
-
 
 	private void createGraph() {
 		data();

@@ -165,8 +165,10 @@ public class PrincipalWindow extends JFrame {
 		this.setVisible(true);
 	}
 
-	public void setLblBMIData(String lblBMIData) {
-		this.lblBMIData.setText(lblBMIData);
+	public void setLblBMIData(double lblBMIData) {
+		// parseo a string para que no se muestre con tantos decimales
+		String lblBMIData1 = String.valueOf(lblBMIData);
+		this.lblBMIData.setText(lblBMIData1);
 	}
 
 	public void obtainResults(String name) {
