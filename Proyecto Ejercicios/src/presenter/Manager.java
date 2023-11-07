@@ -23,16 +23,29 @@ public class Manager implements ActionListener {
 		String comand = e.getActionCommand();
 		if (comand.equals("Buscar")) {
 			String muscularGroup = (String) principal.getComboBox().getSelectedItem();
-			double weight = Integer.parseInt(principal.getTxtPeso().getText());
-			double height = Integer.parseInt(principal.getTxtAltura().getText()) * 0.01;
-			double bmi = (weight / (height * height));
+
+			double weight = isNumeric(principal.getTxtPeso().getText())
+					? Double.parseDouble(principal.getTxtPeso().getText())
+					: 0;
+			double height = isNumeric(principal.getTxtAltura().getText())
+					? Double.parseDouble(principal.getTxtAltura().getText()) * 0.01
+					: 0;
+			double bmi = height != 0 ? (weight / (height * height)) : 0;
 			Exercise aux = graph.findMostRecommendedExerciseByMuscularGroup(muscularGroup, bmi);
 			if (aux != null) {
-				principal.updateLabelText(aux.toString());
+				if (bmi == 0) {
+					principal.updateLabelText("Ingrese valores numéricos para altura y peso");
+				} else {
+					principal.updateLabelText(aux.toString());
+				}
 			} else {
 				principal.updateLabelText("No hay ejercicios recomendados en este grupo muscular para su IMC.");
 			}
 		}
+	}
+
+	public static boolean isNumeric(String str) {
+		return str.matches("-?\\d+(\\.\\d+)?");
 	}
 
 	public ArrayList<String> armMuscles = new ArrayList<>(
