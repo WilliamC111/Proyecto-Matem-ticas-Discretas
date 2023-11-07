@@ -149,12 +149,12 @@ public class PrincipalWindow extends JFrame {
 
 		ModifyPanel panel_1 = new ModifyPanel();
 		panel_1.setDirectionImg("/img/fondo.png");
-		panel_1.setBounds(170, 335, 250, 225);
+		panel_1.setBounds(170, 335, 280, 225);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 
 		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setFont(new Font("Yu Gothic UI", Font.PLAIN, 14));
+		lblNewLabel_1.setFont(new Font("Yu Gothic UI", Font.PLAIN, 12));
 		lblNewLabel_1.setForeground(Color.black);
 		lblNewLabel_1.setBounds(10, 25, 245, 225);
 		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
