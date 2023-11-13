@@ -71,7 +71,13 @@ public class Graph {
                                     // Calcula el peso de la conexión como la suma de la imc recomendado de ambos
                                     // ejercicios
 
-                                    double weight = exercise1.getMaxBmi() + exercise2.getMaxBmi();
+                                    double weight = (exercise1.getMaxBmi() + (exercise1.getIdExercise() * 0.01))
+                                            + (exercise2.getMaxBmi() + (exercise2.getIdExercise() * 0.01));
+
+                                    // System.out.println(
+                                    // exercise1.getNameExcercise() + " - " + exercise2.getNameExcercise() + " = "
+                                    // + muscularGroupExcercise1 + " - " + muscularGroupExcercise2 + " = "
+                                    // + weight);
 
                                     // Agrega la conexión en ambos sentidos
                                     excercise1Connections.put(exercise2, weight);
